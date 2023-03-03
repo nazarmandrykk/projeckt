@@ -20,8 +20,7 @@ public class SpringmoduleApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(SpringmoduleApplication.class, args);
-         ArrayList<String> a1 = new ArrayList<String>();
-        a1.add("test");
+
 
 
 
