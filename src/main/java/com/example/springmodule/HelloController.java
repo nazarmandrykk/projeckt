@@ -19,6 +19,7 @@ public class HelloController {
         strings.add("Vlad");
         strings.add("Andea");
 
+
         if (!strings.contains(name)) {
             return "Імя немає у списку ";
         }
@@ -27,7 +28,7 @@ public class HelloController {
         ArrayList charName = new ArrayList<>();
 
         if(name.equals("Nazar")) {
-            for (char c : name.toCharArray()) {
+            for (char c : x1.lib1.charSearchInString(name)) {
                 charName.add(c);
             }
         }else return "Це не наше імя";
