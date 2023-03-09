@@ -1,11 +1,6 @@
 package com.example.springmodule;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.ModelAndView;
-import x1.lib1;
+
 
 import java.util.ArrayList;
 
@@ -21,8 +16,8 @@ public class HelloController {
         strings.add("Andea");
 
 
-        if (!isValidNameFormat(name)) {
-            throw new InvalidNameFormatException();
+        if (!ValidNameOrNot(name)) {
+            throw new NameError(); //тут ми створюєм нову помилку
         }
 
         if (!strings.contains(name)) {
@@ -38,7 +33,7 @@ public class HelloController {
     }
 
 
-    private boolean isValidNameFormat(String name) {
+    private boolean ValidNameOrNot(String name) {
         char firstChar = name.charAt(0);
         if (!Character.isUpperCase(firstChar)) {
             return false;
@@ -51,26 +46,19 @@ public class HelloController {
         }
         return true;
     }
+}
 
-    @ControllerAdvice
-    public class NameFormatAdvice {
+@ControllerAdvice
+ class NameFormatAdvice {
 
-        @ExceptionHandler(InvalidNameFormatException.class)
-        public String handleInvalidNameFormat() {
-            return "error";
-        }
-    }
-    @GetMapping("/error")
-    public String errPage(){
+    @ExceptionHandler(NameError.class) //а тут воно якби паше,коли дійсно не проходить 'валідацію',але замість того щоб виводити 'ерор' виводить дещо інше
+    public String handlerInvalidName() {
         return "error";
     }
+}
 
 
-
-    // Виняток для помилок у форматуванні імені
-    public class InvalidNameFormatException extends RuntimeException {
-    }
-
+ class NameError extends RuntimeException {
 }
 
 
