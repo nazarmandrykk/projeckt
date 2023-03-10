@@ -1,13 +1,19 @@
 package com.example.springmodule;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 
 import java.util.ArrayList;
 
 @RestController
+@Api(description = "testAPI")
 public class HelloController {
     String nameall;
     @GetMapping("/greeting")
+    @ApiOperation("FinalMethod")
     public String greeting(@RequestParam("name") String name) {
         ArrayList<String> strings = new ArrayList<>();
         strings.add("Vika");
@@ -32,7 +38,7 @@ public class HelloController {
         return "Привіт, " + name + "! Символи в імені: " + charName;
     }
 
-
+    @ApiOperation("CheckValid")
     private boolean ValidNameOrNot(String name) {
         char firstChar = name.charAt(0);
         if (!Character.isUpperCase(firstChar)) {
@@ -51,13 +57,24 @@ public class HelloController {
 @ControllerAdvice
  class NameFormatAdvice {
 
-    @ExceptionHandler(NameError.class) //а тут воно якби паше,коли дійсно не проходить 'валідацію',але замість того щоб виводити 'ерор' виводить дещо інше
-    public String handlerInvalidName() {
+    @ExceptionHandler(NameError.class)
+    @ApiOperation("ErrorMethod")
+    public ModelAndView handleException(NameError ex) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error");
+        return modelAndView;
+    }
+
+      /*
+
+    @ExceptionHandler(NameError.class)
+    public String handleException(NameError ex, Model model) {
+        model.addAttribute("errorMessage", ex.getMessage());
         return "error";
     }
+
+     */
 }
-
-
  class NameError extends RuntimeException {
 }
 

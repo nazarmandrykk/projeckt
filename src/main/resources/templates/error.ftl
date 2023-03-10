@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
-<#assign title = "Error">
-<title>${title}</title>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
 <body>
-<h1>${title}</h1>
-<p>${errorMessage}</p>
+
+
+<p>error</p>
+
 </body>
 </html>

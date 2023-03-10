@@ -1,0 +1,54 @@
+swagger: '2.0'
+openapi: 3.0.0
+info:
+  title: Hello Controller API
+  description: API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:8080/
+paths:
+  /greeting:
+    get:
+      descriptions:
+        - testAPI
+      summary: FinalMethod
+      parameters:
+        - in: query
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  code:
+                    type: integer
+    servers:
+      - url: http://localhost:8080/
+  /error:
+    get:
+      tags:
+        - ControllerAPI
+      summary: ErrorMethod
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+    servers:
+      - url: http://localhost:8080/
